@@ -38,6 +38,13 @@ res.setHeader('Content-Type', 'application/json');
 server.post('/dr',urlencodedParser,function(req,res){
   console.log(req.body);
   var dat=req.body;
+  
+  dat.name= dat.name.replace(/<.*>/, '');
+  
+  dat.msg= dat.msg.replace(/<.*>/, '');
+  
+  dat.room= dat.room.replace(/<.*>/, '');
+  
   var pone=Chat({room:dat.room,name:dat.name,msg:dat.msg}).save(
   function(err){
     if(err) console.log(err);
