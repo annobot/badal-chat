@@ -39,7 +39,13 @@ server.post('/dr',urlencodedParser,function(req,res){
   console.log(req.body);
   var dat=req.body;
   
+    
+    var regex = /(<([^>]+)>)/ig;
+    dat.name= dat.name.replace(regex, "");
   
+    dat.room= dat.room.replace(regex, "");
+  
+    dat.msg= dat.msg.replace(regex, "");
   
   var pone=Chat({room:dat.room,name:dat.name,msg:dat.msg}).save(
   function(err){
