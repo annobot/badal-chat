@@ -61,6 +61,11 @@ server.get('/',function(req,res){
 
 });
 
+server.get('/start.js',function(req,res){
+  res.render('test');
+
+});
+
 
 
 server.listen(process.env.PORT || 3000);
