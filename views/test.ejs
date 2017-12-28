@@ -8,7 +8,7 @@
 var fix=0;
 
 $(document).ready(function functionName() {
-  
+
 setInterval(function(){
 var x=$('.name').val();
   var url="/te/"+$('.room').val();
@@ -23,7 +23,12 @@ console.clear();
 $(".dis").html("");
   for(var i=0;i<res.length;i++){
 console.log(res[i][1].msg);
-$('.dis').append("<p ><strong>"+res[i][1].name+": </strong> "+res[i][1].msg+"</p>");
+if(x==res[i][1].name){
+$('.dis').append("<p class='my'>"+res[i][1].msg+"</p>");
+}
+else{
+$('.dis').append("<p class='their'><strong>"+res[i][1].name+": </strong> "+res[i][1].msg+"</p>");
+}
 }
 
 $('.dis').animate({
@@ -65,7 +70,13 @@ $(".dis").css({display:"block"});
 $("input").css('margin-top','-30px');
 $(".send").css('margin-top','-14px');
 });
-
+$(document).on('keyup', function(e){
+    var key = e.which;
+    if(key == 13)  // the enter key ascii code
+    {
+      $(".send").click();
+    }
+});
 });
 
 </script>
@@ -75,15 +86,35 @@ $(".send").css('margin-top','-14px');
 *{padding: 0 0;
 margin: 0 0;
 }
-p{ box-shadow: inset 5px 5px 5px rgba(0,0,0,0.4);
+.my{ box-shadow: inset 5px 5px 5px rgba(0,0,0,0.4);
 margin-top: 10px;
 height: auto;
 padding-top: 10px;
 padding-left: 15px;
 padding-bottom: 10px;
-width: 80%;
-color:white;
-margin-left: 10%;
+width: 70%;
+background-color: lightpink;
+color:black;
+text-align:left;
+margin-left: 21%;
+border-radius: 30px;
+margin-bottom: 0px;
+
+padding-right:10px;
+}
+.their{ box-shadow: inset 5px 5px 5px rgba(0,0,0,0.4);
+margin-top: 10px;
+text-align:left ;
+
+height: auto;
+padding-top: 10px;
+padding-left: 15px;
+padding-right:15px;
+padding-bottom: 10px;
+width: 70%;
+color:black;
+background-color: lightgreen;
+margin-left: 3%;
 border-radius: 30px;
 margin-bottom: 0px;
 }
@@ -172,4 +203,3 @@ input:focus {
  <input type="text" class="msg" id="msg"  placeholder="enter your message"><br>
  <input type="text" class="room" id="room"  placeholder="enter chat room name"><br>
  <button type="button" class="send"><strong>Send</strong></button>
-
